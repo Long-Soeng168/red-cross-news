@@ -1,0 +1,32 @@
+      /* Custom styles */
+      .audio-container {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .audio-player {
+        background-color: #f3f4f6;
+        border-radius: 10px;
+        padding: 20px;
+      }
+
+      .audio-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .audio-controls button {
+        background-color: #4b5563;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .audio-controls button:hover {
+        background-color: #6b7280;
+      }
