@@ -312,7 +312,7 @@ class NewsCreate extends Component
             $news_path = public_path('assets/images/news/' . $filename);
             $news_thumb_path = public_path('assets/images/news/thumb/' . $filename);
             $imageUpload = ImageClass::make($this->image->getRealPath())->save($news_path);
-            $imageUpload->resize(650, null, function ($resize) {
+            $imageUpload->resize(750, null, function ($resize) {
                 $resize->aspectRatio();
             })->save($news_thumb_path);
             $validated['image'] = $filename;
