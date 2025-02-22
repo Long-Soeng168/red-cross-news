@@ -84,7 +84,6 @@ class NewsEdit extends Component
             session()->flash('success', 'Add New Author successfully!');
 
             $this->reset(['newAuthorName', 'newAuthorGender']);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             session()->flash('error', $e->validator->errors()->all());
         }
@@ -107,7 +106,6 @@ class NewsEdit extends Component
             session()->flash('success', 'Add New Keyword successfully!');
 
             $this->reset(['newKeywordName']);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             session()->flash('error', $e->validator->errors()->all());
         }
@@ -134,7 +132,6 @@ class NewsEdit extends Component
             session()->flash('success', 'Add New Category successfully!');
 
             $this->reset(['newCategoryName', 'newCategoryNameKh']);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             session()->flash('error', $e->validator->errors()->all());
         }
@@ -163,7 +160,6 @@ class NewsEdit extends Component
             session()->flash('success', 'Add New Sub-Category successfully!');
 
             $this->reset(['newSubCategoryName', 'newSubCategoryNameKh', 'selectedCategoryId']);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             session()->flash('error', $e->validator->errors()->all());
         }
@@ -189,7 +185,6 @@ class NewsEdit extends Component
             session()->flash('success', 'Add New Type successfully!');
 
             $this->reset(['newTypeName', 'newTypeNameKh']);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             session()->flash('error', $e->validator->errors()->all());
         }
@@ -215,7 +210,6 @@ class NewsEdit extends Component
             session()->flash('success', 'Add New Publisher successfully!');
 
             $this->reset(['newPublisherName', 'newPublisherGender']);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             session()->flash('error', $e->validator->errors()->all());
         }
@@ -239,7 +233,6 @@ class NewsEdit extends Component
             session()->flash('success', 'Add New Location successfully!');
 
             $this->reset(['newLocationName']);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             session()->flash('error', $e->validator->errors()->all());
         }
@@ -265,7 +258,6 @@ class NewsEdit extends Component
             session()->flash('success', 'Add New Language successfully!');
 
             $this->reset(['newLanguageName', 'newLanguageNameKh']);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             session()->flash('error', $e->validator->errors()->all());
         }
@@ -336,7 +328,7 @@ class NewsEdit extends Component
             $image_path = public_path('assets/images/news/' . $filename);
             $image_thumb_path = public_path('assets/images/news/thumb/' . $filename);
             $imageUpload = Image::make($this->image->getRealPath())->save($image_path);
-            $imageUpload->resize(400, null, function ($resize) {
+            $imageUpload->resize(750, null, function ($resize) {
                 $resize->aspectRatio();
             })->save($image_thumb_path);
             $validated['image'] = $filename;
@@ -349,7 +341,7 @@ class NewsEdit extends Component
             if (File::exists($old_thumb_path)) {
                 File::delete($old_thumb_path);
             }
-        }else {
+        } else {
             $validated['image'] = $this->item->image;
         }
 
@@ -362,7 +354,7 @@ class NewsEdit extends Component
             if (File::exists($old_file)) {
                 File::delete($old_file);
             }
-        }else {
+        } else {
             $validated['pdf'] = $this->item->pdf;
         }
 
@@ -381,7 +373,7 @@ class NewsEdit extends Component
         $languages = Language::latest()->get();
         $authors = Author::latest()->get();
         $allKeywords = Keyword::latest()->get();
-// dd($allKeywords);
+        // dd($allKeywords);
         // dump($this->selectedallKeywords);
 
         return view('livewire.news-edit', [
