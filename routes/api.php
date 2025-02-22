@@ -45,7 +45,6 @@ Route::get('publication_categories', [PublicationController::class, 'publication
 Route::get('publication_categories/{id}', [PublicationController::class, 'publicationCategory']);
 Route::get('publication_related_items/{id}', [PublicationController::class, 'relatedItems']);
 
-
 Route::resource('videos', VideoController::class);
 Route::resource('images', ImageController::class);
 Route::resource('audios', AudioController::class);
