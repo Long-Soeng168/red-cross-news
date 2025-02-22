@@ -43,7 +43,6 @@ class NewsCategoryController extends Controller
             $query->where('parent_code', null);
         }
 
-
         switch ($sort_by) {
             case 'title_desc':
                 $query->orderBy('title', 'desc');

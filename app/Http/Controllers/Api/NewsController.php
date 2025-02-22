@@ -28,6 +28,7 @@ class NewsController extends Controller
             });
         }
 
+
         switch ($sort_by) {
             case 'title_desc':
                 $query->orderBy('title', 'desc');
