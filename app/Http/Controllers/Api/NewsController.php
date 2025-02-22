@@ -44,29 +44,30 @@ class NewsController extends Controller
         return response()->json($categories);
     }
 
-    public function publicationCategories()
+    public function relatedProducts($id)
     {
-        $items = PublicationCategory::get();
-        return response()->json($items, 200);
+        // Find the product by its ID or throw a 404 error
+        $product = News::findOrFail($id);
+
+        // Number of products per page (define the $perPage variable)
+        $perPage = 10;
+
+        // Query to get products in the same category, excluding the current product
+        $query = News::where('news_category_id', $product->news_category_id)
+            ->where('id', '!=', $product->id)
+            ->orderBy('id', 'desc');
+
+        // Select the necessary columns and paginate
+        $products = $query->paginate($perPage);
+
+        // Return the paginated products as a JSON response
+        return response()->json($products);
     }
 
-    public function publicationCategory($id)
+    public function getProductsByCategory(String $category_id)
     {
-        $item = PublicationCategory::find($id);
-        return response()->json($item, 200);
-    }
-
-    public function relatedItems(Request $request, $id)
-    {
-        $publication = Publication::findOrFail($id);
-
-        $query = Publication::query();
-        $query->where('publication_category_id', $publication->publication_category_id);
-        $query->where('id', '!=', $publication->id);
-        // $query->orderBy('id', 'desc');
-        $query->inRandomOrder();
-        $items = $query->paginate(10);
-        return response()->json($items, 200);
+        $products = News::where('news_category_id', $category_id)->latest()->paginate(10);
+        return response()->json($products);
     }
 
     /**
@@ -80,29 +81,16 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        $item = Publication::with([
-            'publicationCategory',
-            'publicationSubCategory',
-            'publicationType',
-            'author',
-            'publisher',
-            'language',
-            'location',
-            'user',
-            'images:image,publication_id'
-        ])->findOrFail($id);
-
-        return response()->json($item, 200);
+        $product = News::with('category', 'images')->find($id);
+        return response()->json($product);
     }
 
 

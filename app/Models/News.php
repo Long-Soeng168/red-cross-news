@@ -11,33 +11,44 @@ class News extends Model
 
     protected $guarded = [];
 
-    public function author(){
+    public function newsCategory()
+    {
+        return $this->belongsTo(NewsCategory::class, 'news_category_id', 'id');
+    }
+    public function images()
+    {
+        return $this->hasMany(NewsImage::class, 'news_id', 'id');
+    }
+    public function author()
+    {
         return $this->belongsTo(Author::class, 'author_id', 'id');
     }
 
-    public function newsCategory(){
-        return $this->belongsTo(NewsCategory::class, 'news_category_id', 'id');
-    }
-
-    public function newsSubCategory(){
+    public function newsSubCategory()
+    {
         return $this->belongsTo(NewsSubCategory::class, 'news_sub_category_id', 'id');
     }
 
-    public function publisher(){
+    public function publisher()
+    {
         return $this->belongsTo(Publisher::class, 'publisher_id', 'id');
     }
 
-    public function newsType(){
+    public function newsType()
+    {
         return $this->belongsTo(NewsType::class, 'news_type_id', 'id');
     }
 
-    public function language(){
+    public function language()
+    {
         return $this->belongsTo(Language::class, 'language_id', 'id');
     }
-    public function location(){
+    public function location()
+    {
         return $this->belongsTo(Location::class, 'location_id', 'id');
     }
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'create_by_user_id', 'id');
     }
 }
