@@ -39,7 +39,14 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'real_public' => [
+            'driver' => 'local',
+            'root' => public_path(''),
+            'url' => env('APP_URL'),
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -47,7 +54,7 @@ return [
         'livewireLocal' => [
             'driver' => 'local',
             'root' => public_path('/livewire'),
-            'url' => env('APP_URL').'/livewire',
+            'url' => env('APP_URL') . '/livewire',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -55,7 +62,7 @@ return [
         'publicForCKeditor' => [
             'driver' => 'local',
             'root' => public_path('assets/images/ckeditor'),
-            'url' => env('APP_URL').'/assets/images/ckeditor',
+            'url' => env('APP_URL') . '/assets/images/ckeditor',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -63,7 +70,7 @@ return [
         'publicForVideo' => [
             'driver' => 'local',
             'root' => public_path('assets/videos'),
-            'url' => env('APP_URL').'/assets/videos',
+            'url' => env('APP_URL') . '/assets/videos',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -71,7 +78,7 @@ return [
         'publicForPdf' => [
             'driver' => 'local',
             'root' => public_path('assets/pdf'),
-            'url' => env('APP_URL').'/assets/pdf',
+            'url' => env('APP_URL') . '/assets/pdf',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -79,7 +86,7 @@ return [
         'publicForAudio' => [
             'driver' => 'local',
             'root' => public_path('assets/audios'),
-            'url' => env('APP_URL').'/assets/audios',
+            'url' => env('APP_URL') . '/assets/audios',
             'visibility' => 'public',
             'throw' => false,
         ],

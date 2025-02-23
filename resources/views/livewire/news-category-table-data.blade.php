@@ -99,7 +99,7 @@
             @endcan
 
             <!-- Start Type modal -->
-            <div id="create_modal" tabindex="-1" aria-hidden="true"
+            <div id="create_modal" tabindex="-1" aria-hidden="true" wire:ignore
                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full lg:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class="relative w-full max-w-md max-h-full p-4">
                     <!-- Modal content -->
@@ -123,6 +123,10 @@
                         </div>
                         <!-- Modal body -->
                         <div class="p-4 lg:p-5">
+                            <div class="py-4">
+                                <input type="file" wire:model='image'
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[100%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            </div>
                             <div class="grid grid-cols-2 gap-4 mb-4 ">
                                 <div class="col-span-2">
                                     <label for="name"
@@ -140,6 +144,18 @@
                                         KH</label>
                                     <input wire:key="{{ rand() }}" type="text" name="name_kh"
                                         id="name_kh" wire:model='newName_kh'
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        placeholder="Name KH">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mb-4 ">
+                                <div class="col-span-2">
+                                    <label for="orderIndex"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Order Index
+                                    </label>
+                                    <input wire:key="{{ rand() }}" type="text" name="orderIndex"
+                                        id="orderIndex" wire:model='newOrderIndex'
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         placeholder="Name KH">
                                 </div>
@@ -163,22 +179,6 @@
             </div>
             <!-- End Type modal -->
 
-            <div class="flex items-center w-full space-x-3 md:w-auto">
-                <button id="filterDropdownButton"
-                    class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                    type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-file-up">
-                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
-                        <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-                        <path d="M12 12v6" />
-                        <path d="m15 15-3-3-3 3" />
-                    </svg>
-                    Export
-                </button>
-
-            </div>
         </div>
     </div>
     <div class="overflow-x-auto">
@@ -186,6 +186,7 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-4 py-3">No</th>
+                    <th scope="col" class="px-4 py-3">Image</th>
                     <th scope="col" class="px-4 py-3 " wire:click='setSortBy("name")'>
                         <div class="flex items-center cursor-pointer">
 
@@ -200,8 +201,8 @@
                         </div>
                     </th>
                     <th scope="col" class="px-4 py-3">Name KH</th>
-                    <th scope="col" class="px-4 py-3">Order Index</th>
-                    <th scope="col" class="px-4 py-3">Created At</th>
+                    <th scope="col" class="px-4 py-3 text-center">Order Index</th>
+                    <th scope="col" class="px-4 py-3 text-center">Status</th>
                     <th scope="col" class="py-3 text-center w-[300px]">Action</th>
                 </tr>
             </thead>
@@ -215,6 +216,10 @@
 
                         @if ($editId == $item->id)
                             <td>
+                                <input type="file" wire:model='image'
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[90%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            </td>
+                            <td>
                                 <input type="text" wire:model='name'
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[90%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </td>
@@ -222,8 +227,18 @@
                                 <input type="text" wire:model='name_kh'
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[90%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </td>
-                            <td></td>
+                            <td>
+                                <input type="text" wire:model='order_index'
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[90%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            </td>
                         @else
+                            <th scope="row"
+                                class="flex items-center px-4 py-2 font-medium text-gray-900 dark:text-white">
+                                <a href="{{ asset('assets/images/categories/' . $item->image) }}" class="glightbox">
+                                    <img src="{{ asset('assets/images/categories/' . $item->image) }}" alt="Image"
+                                        class="object-contain h-10 mr-3 aspect-[1/1]">
+                                </a>
+                            </th>
                             <x-table-data value="{{ $item->name }}" />
                             <x-table-data>
                                 <span
@@ -231,8 +246,63 @@
                                     {{ $item->name_kh ? $item->name_kh : 'N/A' }}
                                 </span>
                             </x-table-data>
-                            <x-table-data value="{{ $item->order_index }}" />
-                            <x-table-data class="capitalize" value="{{ $item->created_at?->format('d-M-Y') }}" />
+                            <x-table-data class="text-center" value="{{ $item->order_index }}" />
+                            <td class="text-center">
+                                <button data-modal-target="popup-modal-user-{{ $item->id }}"
+                                    data-modal-toggle="popup-modal-user-{{ $item->id }}">
+                                    @if ($item->status == 1)
+                                        <span class="w-4 px-4 py-3 font-semibold text-green-700">
+                                            Public
+                                        </span>
+                                    @else
+                                        <span class="w-4 px-4 py-3 font-semibold text-yellow-600 whitespace-nowrap">
+                                            Not-Public
+                                        </span>
+                                    @endif
+                                </button>
+
+                                <div id="popup-modal-user-{{ $item->id }}" tabindex="-1"
+                                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="relative w-full max-w-md max-h-full p-4">
+                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                            <button type="button"
+                                                class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                data-modal-hide="popup-modal-user-{{ $item->id }}">
+                                                <svg class="w-3 h-3" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 14 14">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                </svg>
+                                            </button>
+                                            <div class="p-4 text-center md:p-5">
+                                                <svg class="w-12 h-12 mx-auto mb-4 text-gray-400 dark:text-gray-200"
+                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none" viewBox="0 0 20 20">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                </svg>
+                                                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                                    Update Status for : <strong>{{ $item->name }}</strong>
+                                                </h3>
+                                                <button data-modal-hide="popup-modal-user-{{ $item->id }}"
+                                                    type="button" wire:click='updateStatus({{ $item->id }}, 0)'
+                                                    class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                                    Not-Public
+                                                </button>
+                                                <button data-modal-hide="popup-modal-user-{{ $item->id }}"
+                                                    type="button" wire:click='updateStatus({{ $item->id }}, 1)'
+                                                    class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                                    Public
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
                         @endif
 
                         <td class="px-6 py-4 ">
@@ -305,6 +375,7 @@
                                                 style="display: none;">
                                                 Edit
                                             </div>
+
                                         </div>
                                     @endcan
                                 @endif
