@@ -10,6 +10,8 @@ class NewsCategory extends Model
     use HasFactory;
     protected $guarded = [];
 
+    protected $table = 'news_categories';
+
 
     public function subCategories()
     {

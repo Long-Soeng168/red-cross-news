@@ -46,29 +46,7 @@ class NewsController extends Controller
     }
     public function categories(Request $request)
     {
-        $search = $request->search ?? null;
-        $sort_by = $request->sort_by ?? null;
-        $per_page = $request->per_page ?? 10;
-
         $query = NewsCategory::query();
-
-        if ($search !== null) {
-            $query->where(function ($sub_query) use ($search) {
-                $sub_query->where('title', 'LIKE', '%' . $search . '%')
-                    ->orWhere('title_kh', 'LIKE', '%' . $search . '%')
-                    ->orWhere('code', 'LIKE', '%' . $search . '%');
-            });
-        }
-
-
-        switch ($sort_by) {
-            case 'title_desc':
-                $query->orderBy('title', 'desc');
-                break;
-            case 'title_asc';
-                $query->orderBy('title', 'asc');
-                break;
-        }
 
         $categories = $query
             ->where('status', 1)

@@ -40,7 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 Route::resource('news', NewsController::class);
-Route::get('news/categories', [NewsController::class, 'categories']);
+Route::get('news_categories', [NewsController::class, 'categories']);
 Route::resource('publications', PublicationController::class);
 Route::get('publication_categories', [PublicationController::class, 'publicationCategories']);
 Route::get('publication_categories/{id}', [PublicationController::class, 'publicationCategory']);
