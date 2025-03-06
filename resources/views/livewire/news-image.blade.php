@@ -135,7 +135,7 @@
                             <img src="{{ $image->temporaryUrl() }}" alt="Preview Image"
                                 class="object-contain max-w-full border rounded-lg shadow-md max-h-40" />
                             <button wire:target="removeImage, save, image, file" wire:loading.attr="disabled"
-                                wire:click.prevent="removeImage({{ $index }})"
+                                wire:click="removeImage({{ $index }})"
                                 class="absolute p-1 text-white transition-opacity duration-300 ease-in-out bg-red-500 rounded-full opacity-0 top-2 right-2 group-hover:opacity-100">
                                 <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
