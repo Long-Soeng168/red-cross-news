@@ -87,7 +87,7 @@ class NewsImage extends Component
 
                 try {
                     $imageUpload = Image::make($image->getRealPath())->save($imagePath);
-                    $imageUpload->resize(400, null, function ($resize) {
+                    $imageUpload->resize(900, null, function ($resize) {
                         $resize->aspectRatio();
                     })->save($imageThumbPath);
 
