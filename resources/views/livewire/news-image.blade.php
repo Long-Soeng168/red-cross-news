@@ -67,13 +67,11 @@
 
         <div class="mb-5">
             {{-- Start Image Upload --}}
-            <div class="items-center gap-5 mb-5 lg:flex space-4" wire:key='uploadimage'
-            x-data="{ uploading: false, progress: 0, paused: false }"
-            x-on:livewire-upload-start="uploading = true; progress = 0; console.log('started');"
-            x-on:livewire-upload-finish="uploading = false; console.log('finished');"
-            x-on:livewire-upload-error="uploading = false"
-            x-on:livewire-upload-progress="progress = $event.detail.progress"
-            >
+            <div class="items-center gap-5 mb-5 lg:flex space-4" wire:key='uploadimage' x-data="{ uploading: false, progress: 0, paused: false }"
+                x-on:livewire-upload-start="uploading = true; progress = 0; console.log('started');"
+                x-on:livewire-upload-finish="uploading = false; console.log('finished');"
+                x-on:livewire-upload-error="uploading = false"
+                x-on:livewire-upload-progress="progress = $event.detail.progress">
                 <div class="flex flex-col flex-1">
                     <label class='mb-4 text-sm font-medium text-gray-600 dark:text-white'>
                         Upload Images (Max: 2MB each) <span class="text-red-500">*</span>
@@ -133,10 +131,11 @@
                 <strong class="text-lg font-semibold">Preview:</strong>
                 <div class="flex flex-wrap gap-4 mt-2">
                     @foreach ($images as $index => $image)
-                        <div class="relative group">
+                        <div wire:key='{{ $index }}' class="relative group">
                             <img src="{{ $image->temporaryUrl() }}" alt="Preview Image"
                                 class="object-contain max-w-full border rounded-lg shadow-md max-h-40" />
-                            <button wire:click.prevent="removeImage({{ $index }})"
+                            <button wire:target="removeImage, save, image, file" wire:loading.attr="disabled"
+                                wire:click.prevent="removeImage({{ $index }})"
                                 class="absolute p-1 text-white transition-opacity duration-300 ease-in-out bg-red-500 rounded-full opacity-0 top-2 right-2 group-hover:opacity-100">
                                 <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
@@ -160,8 +159,8 @@
                 Save Images
             </button>
             <span wire:target="save" wire:loading>
-                <img class="inline w-6 h-6 text-white me-2 animate-spin" src="{{ asset('assets/images/reload.png') }}"
-                    alt="reload-icon">
+                <img class="inline w-6 h-6 text-white me-2 animate-spin"
+                    src="{{ asset('assets/images/reload.png') }}" alt="reload-icon">
                 Saving
             </span>
         </div>
@@ -174,16 +173,15 @@
             <div class="flex flex-wrap gap-4 mt-2">
                 @forelse ($multiImages as $index => $image)
                     <div class="relative group">
-                        <img src="{{ asset('assets/images/news/thumb/' . $image->image) }}"
-                            alt="Preview Image"
+                        <img src="{{ asset('assets/images/news/thumb/' . $image->image) }}" alt="Preview Image"
                             class="object-contain max-w-full border rounded-lg shadow-md max-h-40" />
-                            <button wire:click="delete({{ $image->id }})"
-                                wire:loading.attr="disabled"
-                                wire:loading.class="opacity-50 cursor-not-allowed"
-                                wire:target="delete"
-                                class="absolute p-1 text-white transition-opacity duration-300 ease-in-out bg-red-500 rounded-full opacity-0 top-2 right-2 group-hover:opacity-100">
-                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <button wire:click="delete({{ $image->id }})" wire:loading.attr="disabled"
+                            wire:loading.class="opacity-50 cursor-not-allowed" wire:target="delete"
+                            class="absolute p-1 text-white transition-opacity duration-300 ease-in-out bg-red-500 rounded-full opacity-0 top-2 right-2 group-hover:opacity-100">
+                            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
                     </div>
