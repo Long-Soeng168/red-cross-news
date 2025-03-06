@@ -61,7 +61,7 @@ class SlideCreate extends Component
             $image_path = public_path('assets/images/slides/' . $filename);
             $image_thumb_path = public_path('assets/images/slides/thumb/' . $filename);
             $imageUpload = Image::make($this->image->getRealPath())->save($image_path);
-            $imageUpload->resize(900, null, function ($resize) {
+            $imageUpload->resize(800, null, function ($resize) {
                 $resize->aspectRatio();
             })->save($image_thumb_path);
             $validated['image'] = $filename;

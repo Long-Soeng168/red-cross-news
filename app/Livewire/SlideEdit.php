@@ -61,14 +61,14 @@ class SlideEdit extends Component
 
         // dd($validated);
 
-        if(!empty($this->image)){
+        if (!empty($this->image)) {
             // $filename = time() . '_' . $this->image->getClientOriginalName();
             $filename = time() . str()->random(10) . '.' . $this->image->getClientOriginalExtension();
 
-            $image_path = public_path('assets/images/slides/'.$filename);
-            $image_thumb_path = public_path('assets/images/slides/thumb/'.$filename);
+            $image_path = public_path('assets/images/slides/' . $filename);
+            $image_thumb_path = public_path('assets/images/slides/thumb/' . $filename);
             $imageUpload = Image::make($this->image->getRealPath())->save($image_path);
-            $imageUpload->resize(1280,null,function($resize){
+            $imageUpload->resize(800, null, function ($resize) {
                 $resize->aspectRatio();
             })->save($image_thumb_path);
             $validated['image'] = $filename;
@@ -90,4 +90,3 @@ class SlideEdit extends Component
         return view('livewire.slide-edit');
     }
 }
-
