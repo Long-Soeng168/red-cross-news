@@ -54,7 +54,7 @@ class NewsImage extends Component
             'images.*' => 'image|max:2048', // 2MB Max for each image
         ]);
 
-        return redirect('/admin/bulletins_images/' . $item->id)->with('success', 'File uploaded successfully!');
+        return redirect('/admin/bulletins_images/' . $this->item->id)->with('success', 'File uploaded successfully!');
     }
 
     public function save()

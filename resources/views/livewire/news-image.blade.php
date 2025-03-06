@@ -172,7 +172,7 @@
             <strong class="text-lg font-semibold">Available Images:</strong>
             <div class="flex flex-wrap gap-4 mt-2">
                 @forelse ($multiImages as $index => $image)
-                    <div class="relative group">
+                    <div class="relative group" wire:key='{{ $index }}'>
                         <img src="{{ asset('assets/images/news/thumb/' . $image->image) }}" alt="Preview Image"
                             class="object-contain max-w-full border rounded-lg shadow-md max-h-40" />
                         <button wire:click="delete({{ $image->id }})" wire:loading.attr="disabled"
