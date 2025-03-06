@@ -44,8 +44,8 @@ class NewsImage extends Component
 
         // Delete the record from the database
         $image->delete();
-
-        session()->flash('success', 'File deleted successfully!');
+        return redirect('/admin/bulletins_images/' . $this->item->id)->with('success', 'File delete successfully!');
+        // session()->flash('success', 'File deleted successfully!');
     }
 
     public function updatedImages()
@@ -54,7 +54,7 @@ class NewsImage extends Component
             'images.*' => 'image|max:2048', // 2MB Max for each image
         ]);
 
-        return redirect('/admin/bulletins_images/' . $this->item->id)->with('success', 'File uploaded successfully!');
+        session()->flash('success', 'File uploaded successfully!');
     }
 
     public function save()
